@@ -1652,7 +1652,7 @@ angular.module('myApp.directives', ['myApp.filters'])
 
       var richTextarea = composer.richTextareaEl && composer.richTextareaEl[0]
       if (richTextarea) {
-        $(richTextarea).on('keydown keyup', updateHeight)
+        $(richTextarea).on('keydown keyup input', updateHeight)
       }
 
       $scope.$on('inline_results', function (e, inlineResults) {
