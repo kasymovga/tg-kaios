@@ -819,7 +819,7 @@ angular.module('myApp.directives', ['myApp.filters'])
             return cancelEvent(e)
           }
         }
-        if (e.keyCode == 8) {
+        if (e.keyCode == 8 && navigator.spatialNavigationEnabled !== undefined) {
           if ((document.activeElement.className == 'composer_rich_textarea') || (document.activeElement.tagName == 'INPUT')) {
             if (document.activeElement.textLength === 0 || document.activeElement.textContent === "") {
               if (navigator.spatialNavigationEnabled === true) {
