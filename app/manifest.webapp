@@ -3,7 +3,6 @@
   "description": "Telegram Web App.\nMore info & source code here: https://github.com/zhukov/webogram",
   "version": "0.5.7",
   "type": "privileged",
-  "cursor": true,
   "ime_default_softkey_bar": true,
   "launch_path": "/index.html",
   "developer": {
@@ -21,6 +20,7 @@
     "notification": "/index.html"
   }],
   "permissions": {
+    "spatialnavigation-app-manage": {},
     "desktop-notification": {
       "description": "Required to show new message notifications"
     },

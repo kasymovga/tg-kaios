@@ -813,6 +813,54 @@ angular.module('myApp.directives', ['myApp.filters'])
       })
 
       function onKeyDown (e) {
+        if (e.key == 'ArrowUp' || e.key == 'ArrowRight' || e.key == 'ArrowDown' || e.key == 'ArrowLeft') {
+          if (navigator.spatialNavigationEnabled === false && document.activeElement.className !== 'composer_rich_textarea' && document.activeElement.tagName !== 'INPUT') {
+            navigator.spatialNavigationEnabled = true;
+            return cancelEvent(e)
+          }
+        }
+        if (e.keyCode == 8) {
+          if ((document.activeElement.className == 'composer_rich_textarea') || (document.activeElement.tagName == 'INPUT')) {
+            if (document.activeElement.textLength === 0 || document.activeElement.textContent === "") {
+              if (navigator.spatialNavigationEnabled === true) {
+                navigator.spatialNavigationEnabled = false;
+              }
+              return cancelEvent(e)
+            }
+            //if (document.activeElement.selectionStart == 0 && document.activeElement.selectionEnd == 0) {
+            //  return cancelEvent(e)
+            //}
+          } else if (!searchFocused) {
+            if ($modalStack.getTop()) { //Emulate Escape to close modal window
+              var keyboardEvent = document.createEvent("KeyboardEvent");
+              var initMethod = typeof keyboardEvent.initKeyboardEvent !== 'undefined' ? "initKeyboardEvent" : "initKeyEvent";
+              keyboardEvent[initMethod](
+                "keydown", // event type: keydown, keyup, keypress
+                true,      // bubbles
+                true,      // cancelable
+                window,    // view: should be window
+                false,     // ctrlKey
+                false,     // altKey
+                false,     // shiftKey
+                false,     // metaKey
+                27,        // keyCode: unsigned long - the virtual key code, else 0
+                0          // charCode: unsigned long - the Unicode character associated with the depressed key, else 0
+              );
+              document.dispatchEvent(keyboardEvent);
+            } else {
+              if (location.hash == '#/im' || location.hash == '#/login') {
+                if (navigator.spatialNavigationEnabled === true) {
+                  navigator.spatialNavigationEnabled = false;
+                }
+                return true;
+                //window.close();
+              } else {
+                location.hash = '#/im'
+              }
+            }
+            return cancelEvent(e)
+          }
+        }
         if (!searchFocused && $modalStack.getTop()) {
           return true
         }
