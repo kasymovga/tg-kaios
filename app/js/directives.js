@@ -825,6 +825,7 @@ angular.module('myApp.directives', ['myApp.filters'])
               if (navigator.spatialNavigationEnabled === true) {
                 navigator.spatialNavigationEnabled = false;
               }
+              document.activeElement.blur()
               return cancelEvent(e)
             }
             //if (document.activeElement.selectionStart == 0 && document.activeElement.selectionEnd == 0) {
