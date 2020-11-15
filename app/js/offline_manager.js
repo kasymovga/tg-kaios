@@ -13,7 +13,7 @@
   }
 
   if ((!navigator.serviceWorker && !window.applicationCache) ||
-    Config.Modes.packed ||
+    //Config.Modes.packed ||
     !window.addEventListener) {
     return
   }
